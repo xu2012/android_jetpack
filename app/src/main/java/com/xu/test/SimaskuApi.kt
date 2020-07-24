@@ -12,7 +12,7 @@ import okhttp3.Interceptor
 object SimaskuApi:NetWorkApi() {
 
     override fun baseUrl(): String {
-        return "http://www.baidu.com"
+        return "http://117.102.100.212:8084/"
     }
 
     override fun setInterceptors(): List<Interceptor>? {
