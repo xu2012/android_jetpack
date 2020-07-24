@@ -16,22 +16,30 @@ class MainActivity : BaseViewModelActivity<TestViewModel>() {
         button.setOnClickListener {
             viewModel.getConfig()
         }
+        button2.setOnClickListener {
+            viewModel.getConfig2()
+        }
     }
 
     private fun onLoadRetry() {
         viewModel.getConfig()
     }
 
-    override fun showProgress(tag: String) {
+    override fun showLoading() {
         mHolder.showLoading()
     }
 
-    override fun hideProgress(tag: String) {
-        mHolder.showLoadSuccess()
-//        mHolder.showEmpty()
-//        mHolder.showLoadFailed()
+    override fun showEmpty() {
+        mHolder.showEmpty()
     }
 
+    override fun showError() {
+        mHolder.showLoadFailed()
+    }
+
+    override fun showSuccess() {
+        mHolder.showLoadSuccess()
+    }
     override fun initObserver() {
         viewModel.configs.observe(this, Observer {
             //这里处理业务异常？

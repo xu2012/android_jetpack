@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.xu.base.BaseModel
 import com.xu.base.LoadState
 import com.xu.base.dataConvert
+import com.xu.base.initConvert
 import com.xu.test.Config
 import com.xu.test.SimaskuApi
 
@@ -15,6 +16,6 @@ import com.xu.test.SimaskuApi
  */
 class TestModel(private val loadState:MutableLiveData<LoadState>):BaseModel() {
     suspend fun getConfigs(): List<Config>? {
-        return SimaskuApi.create().getAppConfig().dataConvert(loadState)
+        return SimaskuApi.create().getAppConfig().initConvert(loadState)
     }
 }

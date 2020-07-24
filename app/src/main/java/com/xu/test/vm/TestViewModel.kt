@@ -2,10 +2,13 @@ package com.xu.test.vm
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.xu.base.BaseViewModel
+import com.xu.base.initLoad
 import com.xu.base.request
 import com.xu.test.Config
 import com.xu.test.model.TestModel
+import kotlinx.coroutines.launch
 
 /**
  * Description:
@@ -15,9 +18,16 @@ import com.xu.test.model.TestModel
  */
 class TestViewModel(application: Application):BaseViewModel<TestModel>(application) {
     val configs =MutableLiveData<List<Config>>()
-    fun getConfig(){
+    fun getConfig2(){
         request({
             model.getConfigs()
-        },loadState,true,"1")
+        },loadState)
+
+    }
+    fun getConfig(){
+        initLoad({
+            model.getConfigs()
+        },loadState)
+
     }
 }

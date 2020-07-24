@@ -26,10 +26,10 @@ abstract class BaseViewModelActivity<VM : BaseViewModel<*>> : BaseActivity() {
         initObserver()
         viewModel.loadState.observe(this, Observer {
             when (it.status) {
-                StateType.LOADING -> {
+                StateType.SHOW_DIALOG -> {
                     showProgress(it.tag)
                 }
-                StateType.SUCCESS -> {
+                StateType.HIDE_DIALOG -> {
                     hideProgress(it.tag)
                 }
                 StateType.ERROR -> {
@@ -43,29 +43,42 @@ abstract class BaseViewModelActivity<VM : BaseViewModel<*>> : BaseActivity() {
                     }
                 }
                 StateType.TIP -> {
-                    showToast(it.tag,it.message)
+                    showToast(it.tag, it.message)
                 }
-                else -> {}
+                StateType.SHOW_LOADING -> {
+                    showLoading()
+                }
+                StateType.SHOW_SUCCESS -> {
+                    showSuccess()
+                }
+                StateType.SHOW_ERROR -> {
+                    showError()
+                }
+                StateType.SHOW_EMPTY -> {
+                    showEmpty()
+                }
+                else -> {
+                }
             }
         })
     }
 
-     fun showToast(tag: String,message: String?) {
-         message?.let {
-             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-         }
+    fun showToast(tag: String, message: String?) {
+        message?.let {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
-     fun onError(code: String, message: String?, tag: String) {
-         message?.let {
-             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-         }
+    fun onError(code: String, message: String?, tag: String) {
+        message?.let {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
-     fun reLogin() {
+    fun reLogin() {
     }
 
-     open fun hideProgress(tag: String) {
+    open fun hideProgress(tag: String) {
         progressDialog?.dismiss()
     }
 
@@ -75,7 +88,11 @@ abstract class BaseViewModelActivity<VM : BaseViewModel<*>> : BaseActivity() {
         }
         progressDialog?.show()
     }
-
+    open fun showLoading(){
+    }
+    open fun showSuccess(){}
+    open fun showEmpty(){}
+    open fun showError(){}
 
     abstract fun initObserver()
 }

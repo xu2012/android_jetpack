@@ -18,48 +18,81 @@ fun <T : BaseModel> BaseViewModel<T>.request(
 ) {
     viewModelScope.launch {
         if (isLoading) {
-            loadState.value = LoadState(StateType.LOADING)
+            loadState.value = LoadState(StateType.SHOW_DIALOG)
         }
         runCatching {
             block()
         }.onSuccess {
-            loadState.postValue(LoadState(StateType.SUCCESS))
-        }.onFailure {
-            if (it is ApiException) {
-                loadState.postValue(LoadState(StateType.ERROR, it.localizedMessage, it.code!!, tag))
-            } else {
-                loadState.postValue(LoadState(StateType.ERROR, message = it.localizedMessage, tag = tag))
+            if (isLoading) {
+                loadState.postValue(LoadState(StateType.HIDE_DIALOG))
             }
+        }.onFailure {
+            if (isLoading) {
+                loadState.postValue(LoadState(StateType.HIDE_DIALOG))
+                if (it is ApiException) {
+                    loadState.postValue(LoadState(StateType.ERROR, it.localizedMessage, it.code!!, tag))
+                } else {
+                    loadState.postValue(
+                        LoadState(
+                            StateType.ERROR,
+                            message = it.localizedMessage,
+                            tag = tag
+                        )
+                    )
+                }
+            }
+
         }
     }
 }
 
 fun <T : BaseModel> BaseViewModel<T>.initLoad(
     block: suspend () -> Unit,
-    loadState: MutableLiveData<LoadState>,
-    isLoading: Boolean = true,
-    tag: String = ""
+    loadState: MutableLiveData<LoadState>
 ) {
     viewModelScope.launch {
-        if (isLoading) {
-            loadState.value = LoadState(StateType.LOADING)
-        }
+        loadState.value = LoadState(StateType.SHOW_LOADING)
         runCatching {
             block()
         }.onSuccess {
-            loadState.postValue(LoadState(StateType.SUCCESS))
         }.onFailure {
             if (it is ApiException) {
-                loadState.postValue(LoadState(StateType.ERROR, it.localizedMessage, it.code!!, tag))
+                loadState.postValue(
+                    LoadState(
+                        StateType.SHOW_ERROR,
+                        it.localizedMessage,
+                        it.code!!
+                    )
+                )
             } else {
-                loadState.postValue(LoadState(StateType.ERROR, message = it.localizedMessage, tag = tag))
+                loadState.postValue(
+                    LoadState(
+                        StateType.SHOW_ERROR,
+                        message = it.localizedMessage
+                    )
+                )
             }
         }
     }
 }
 
+fun <T> ApiResult<T>.initConvert(loadState: MutableLiveData<LoadState>): T? {
+    when (code) {
+        "0" -> {
+            if (content == null) {
+                loadState.postValue(LoadState(StateType.SHOW_EMPTY))
+            } else {
+                loadState.postValue(LoadState(StateType.SHOW_SUCCESS))
+            }
+            return content
+        }
+        else -> {
+            throw ApiException(code, error?.message)
+        }
+    }
+}
 
-fun <T> ApiResult<T>.dataConvert(loadState:  MutableLiveData<LoadState>): T? {
+fun <T> ApiResult<T>.dataConvert(loadState: MutableLiveData<LoadState>): T? {
     when (code) {
         "0" -> {
             return content

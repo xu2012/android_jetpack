@@ -4,10 +4,22 @@ package com.xu.base
  * 应用状态
  */
 enum class StateType {
-    SUCCESS,
+    HIDE_DIALOG,
     ERROR,
-    EMPTY,
-    NETWORK_ERROR,
-    LOADING,
+    SHOW_DIALOG,
     TIP,
+    SHOW_LOADING,
+    SHOW_SUCCESS,
+    SHOW_ERROR,
+    SHOW_EMPTY
 }
+/*
+* showDialog
+* hideDialog
+*
+* showLoading
+* showEmpty
+* showError
+* showToast
+*
+* */
