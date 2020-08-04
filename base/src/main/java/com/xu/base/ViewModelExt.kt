@@ -91,7 +91,16 @@ fun <T> ApiResult<T>.initConvert(loadState: MutableLiveData<LoadState>): T? {
         }
     }
 }
-
+fun <T> ApiResult<T>.dataConvert(): T? {
+    when (code) {
+        "0" -> {
+            return content
+        }
+        else -> {
+            throw ApiException(code, error?.message)
+        }
+    }
+}
 fun <T> ApiResult<T>.dataConvert(loadState: MutableLiveData<LoadState>): T? {
     when (code) {
         "0" -> {

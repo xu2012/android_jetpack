@@ -61,6 +61,13 @@ abstract class BaseViewModelActivity<VM : BaseViewModel<*>> : BaseActivity() {
                 }
             }
         })
+        viewModel.loading.observe(this, Observer {
+            if (it){
+                showProgress()
+            }else{
+                hideProgress()
+            }
+        })
     }
 
     fun showToast(tag: String, message: String?) {
@@ -78,11 +85,11 @@ abstract class BaseViewModelActivity<VM : BaseViewModel<*>> : BaseActivity() {
     fun reLogin() {
     }
 
-    open fun hideProgress(tag: String) {
+    open fun hideProgress(tag: String="") {
         progressDialog?.dismiss()
     }
 
-    open fun showProgress(tag: String) {
+    open fun showProgress(tag: String="") {
         if (null == progressDialog) {
             progressDialog = ProgressDialog(this)
         }

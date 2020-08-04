@@ -2,13 +2,12 @@ package com.xu.test.vm
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.xu.base.BaseViewModel
 import com.xu.base.initLoad
 import com.xu.base.request
 import com.xu.test.Config
+import com.xu.test.model.Test2Model
 import com.xu.test.model.TestModel
-import kotlinx.coroutines.launch
 
 /**
  * Description:

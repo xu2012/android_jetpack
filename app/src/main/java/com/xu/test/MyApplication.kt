@@ -2,6 +2,7 @@ package com.xu.test
 
 import android.app.Application
 import com.billy.android.loading.Gloading
+import com.xu.base.BaseApplication
 import com.xu.common.net.IConfig
 import com.xu.common.net.NetWorkApi
 import com.xu.test.loading.GlobalAdapter
@@ -13,7 +14,7 @@ import com.xu.test.loading.GlobalAdapter
  * Date: 2020/7/24 11:38
  * @version 2.2
  */
-class MyApplication:Application() {
+class MyApplication:BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         NetWorkApi.init(object: IConfig {
