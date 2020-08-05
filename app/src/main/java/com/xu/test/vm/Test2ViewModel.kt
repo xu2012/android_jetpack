@@ -24,7 +24,8 @@ class Test2ViewModel(application: Application):BaseViewModel<Test2Model>(applica
         stateValue.value=0
         launch(
             block = {
-                model.getConfigs()
+
+                configs.value = model.getConfigs()
 //                stateValue.value=1
             },
             showLoading = false,

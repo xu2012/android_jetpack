@@ -1,13 +1,16 @@
 package com.xu.test
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.billy.android.loading.Gloading
+import com.xu.base.BaseViewModel2Activity
 import com.xu.base.BaseViewModelActivity
+import com.xu.navigation.NavigationActivity
 import com.xu.test.vm.Test2ViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseViewModelActivity<Test2ViewModel>() {
+class MainActivity : BaseViewModel2Activity<Test2ViewModel>() {
 
     private lateinit var mHolder: Gloading.Holder
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,25 +22,28 @@ class MainActivity : BaseViewModelActivity<Test2ViewModel>() {
         button2.setOnClickListener {
             viewModel.getConfig2()
         }
+        button3.setOnClickListener {
+            startActivity(Intent(this@MainActivity,NavigationActivity::class.java))
+        }
     }
 
     private fun onLoadRetry() {
         viewModel.getConfig2()
     }
 
-    override fun showLoading() {
+     fun showLoading() {
         mHolder.showLoading()
     }
 
-    override fun showEmpty() {
+     fun showEmpty() {
         mHolder.showEmpty()
     }
 
-    override fun showError() {
+     fun showError() {
         mHolder.showLoadFailed()
     }
 
-    override fun showSuccess() {
+     fun showSuccess() {
         mHolder.showLoadSuccess()
     }
     override fun initObserver() {
