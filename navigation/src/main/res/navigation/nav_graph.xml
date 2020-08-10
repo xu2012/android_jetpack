@@ -12,6 +12,10 @@
         tools:layout="@layout/fragment_root" >
         <action
             android:id="@+id/action_rootFragment_to_secondFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:destination="@id/secondFragment" />
     </fragment>
     <fragment
@@ -25,7 +29,23 @@
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" >
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             android:id="@+id/action_secondFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            android:id="@+id/action_secondFragment_to_tabActivity"
+            app:destination="@id/tabActivity" />
     </fragment>
+    <activity
+        android:id="@+id/tabActivity"
+        android:name="com.xu.navigation.TabActivity"
+        android:label="activity_tab"
+        tools:layout="@layout/activity_tab" />
 </navigation>

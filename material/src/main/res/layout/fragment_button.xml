@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:divider="#cccccc"
+    android:orientation="vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="默认效果"
+        android:textAppearance="?android:attr/textAppearance" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="带描边线"
+        android:backgroundTint="#ffffff"
+        android:textColor="@color/design_default_color_primary"
+        app:strokeColor="@color/design_default_color_primary"
+        app:cornerRadius="100dp"
+        app:strokeWidth="2dp"
+        app:rippleColor="@color/design_default_color_background"
+        android:textAppearance="?android:attr/textAppearance" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="实心颜色"
+        app:cornerRadius="0dp"
+        android:textAppearance="?android:attr/textAppearance" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="实心颜色"
+        android:textAppearance="?android:attr/textAppearance" />
+</LinearLayout>

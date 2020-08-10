@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.billy.android.loading.Gloading
 import com.xu.base.BaseViewModel2Activity
-import com.xu.base.BaseViewModelActivity
+import com.xu.material.MatrialActivity
 import com.xu.navigation.NavigationActivity
+import com.xu.test.dialog.CustomActivity
 import com.xu.test.vm.Test2ViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,6 +25,10 @@ class MainActivity : BaseViewModel2Activity<Test2ViewModel>() {
         }
         button3.setOnClickListener {
             startActivity(Intent(this@MainActivity,NavigationActivity::class.java))
+        }
+        button4.setOnClickListener {
+            startActivity(Intent(this@MainActivity,
+                MatrialActivity::class.java))
         }
     }
 

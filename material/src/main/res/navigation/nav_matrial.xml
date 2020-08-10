@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_matrial"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.xu.material.ListFragment"
+        android:label="ListFragment" >
+        <action
+            android:id="@+id/action_listFragment_to_matrialButtonFragment"
+            app:destination="@id/matrialButtonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matrialButtonFragment"
+        android:name="com.xu.material.widget.MatrialButtonFragment"
+        android:label="MatrialButtonFragment" />
+</navigation>

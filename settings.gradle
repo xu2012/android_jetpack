@@ -1,3 +1,4 @@
+include ':material'
 include ':navigation'
 include ':base'
 include ':common'
